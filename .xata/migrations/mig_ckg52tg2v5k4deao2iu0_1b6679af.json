@@ -1,0 +1,17 @@
+{
+  "id": "mig_ckg52tg2v5k4deao2iu0",
+  "parentID": "mig_ckg52j02v5k4deao2it0",
+  "checksum": "1:1b6679affb1afd5774dd10718e57f814616ce6866970cb2d5b46ae3c0ed73b0d",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string",
+          "unique": true
+        },
+        "table": "units"
+      }
+    }
+  ]
+}

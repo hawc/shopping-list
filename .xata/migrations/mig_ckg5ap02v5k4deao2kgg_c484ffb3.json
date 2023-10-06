@@ -1,0 +1,19 @@
+{
+  "id": "mig_ckg5ap02v5k4deao2kgg",
+  "parentID": "mig_ckg5ado2v5k4deao2kfg",
+  "checksum": "1:c484ffb3260b5c5167f03f3813bf47f1bd0d249c017ec0ad30b7116ee2a27f88",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "list",
+          "type": "link",
+          "link": {
+            "table": "lists"
+          }
+        },
+        "table": "items"
+      }
+    }
+  ]
+}

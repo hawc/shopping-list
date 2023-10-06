@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://Hendrik-s-workspace-0545qt.eu-central-1.xata.sh/db/shopping-list",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}

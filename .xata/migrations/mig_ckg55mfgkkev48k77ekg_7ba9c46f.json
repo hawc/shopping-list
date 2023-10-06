@@ -1,0 +1,18 @@
+{
+  "id": "mig_ckg55mfgkkev48k77ekg",
+  "parentID": "mig_ckg55ae2oomjeice6vl0",
+  "checksum": "1:7ba9c46fcb2c0c9b379c639475a5483098102aab421684dd9cc5ce03aafeb7c6",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "status",
+          "type": "string",
+          "notNull": true,
+          "defaultValue": "ACTIVE"
+        },
+        "table": "items"
+      }
+    }
+  ]
+}

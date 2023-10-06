@@ -1,0 +1,18 @@
+{
+  "id": "mig_ckg59j02v5k4deao2keg",
+  "parentID": "mig_ckg599o2v5k4deao2kdg",
+  "checksum": "1:236e4bc64cb0cc430775a133109e3ec7af6348d1dce80ab062d2ebea1c0f5434",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string",
+          "notNull": true,
+          "defaultValue": "Shopping List"
+        },
+        "table": "lists"
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "mig_ckg54lfgkkev48k77eig",
+  "parentID": "mig_ckg52tg2v5k4deao2iu0",
+  "checksum": "1:de6ef413cf65f629bb61caedc4a6073eae1fd1414ba2d286814da6f7f9f8c48a",
+  "operations": [
+    {
+      "removeTable": {
+        "table": "ingredients"
+      }
+    }
+  ]
+}

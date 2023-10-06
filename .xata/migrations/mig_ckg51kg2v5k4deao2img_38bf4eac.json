@@ -1,0 +1,20 @@
+{
+  "id": "mig_ckg51kg2v5k4deao2img",
+  "parentID": "mig_ckg513vgkkev48k77e2g",
+  "checksum": "1:38bf4eac276b4f3759e1660edb07c0fb9d617d657a9c4ed84113e918486b20b5",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "product",
+          "type": "link",
+          "link": {
+            "table": "products"
+          },
+          "unique": true
+        },
+        "table": "items"
+      }
+    }
+  ]
+}

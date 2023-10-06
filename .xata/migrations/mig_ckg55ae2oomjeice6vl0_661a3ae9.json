@@ -1,0 +1,19 @@
+{
+  "id": "mig_ckg55ae2oomjeice6vl0",
+  "parentID": "mig_ckg55682v5k4deao2iv0",
+  "checksum": "1:661a3ae91c27715e946138c55536dcd85adf3790ad6826f1bab6191a70ff26fc",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "unit",
+          "type": "link",
+          "link": {
+            "table": "units"
+          }
+        },
+        "table": "items"
+      }
+    }
+  ]
+}

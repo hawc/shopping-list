@@ -1,0 +1,16 @@
+{
+  "id": "mig_ckg513vgkkev48k77e2g",
+  "parentID": "mig_ckg501o2v5k4deao2i60",
+  "checksum": "1:2e500035285b211268cb3a86ae9d784f7ff80efa43a8ee27c8e74a9d6222cf95",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "products",
+          "type": "multiple"
+        },
+        "table": "items"
+      }
+    }
+  ]
+}
