@@ -1,25 +1,34 @@
 ---
-import type { Item } from '../pages/index.astro';
+import type { ListType } from '../pages/index.astro';
 import { translate } from '../utils/trans';
 import type { ItemStatus } from '../utils/xata';
+import type { ItemType } from './List.astro';
 import SelectItem from './SelectItem.astro';
 interface Props {
-  item?: Item;
+  item?: ItemType;
+  list: ListType;
 }
 
-const { item } = Astro.props;
+const { item, list } = Astro.props;
 const status = item?.status as ItemStatus;
+const isEditing = false;
 ---
 
 <li class={`block ${status === 'INACTIVE' ? 'line-through' : ''}`}>
   {
     item ? (
       <>
-        {item.name ?? translate(item.product.name)}: {item.amount}&nbsp;
-        {translate(item.unit.name)}
+        {isEditing ? (
+          <SelectItem item={item} list={list} />
+        ) : (
+          <>
+            {item.name ?? translate(item.product.name)}: {item.amount}&nbsp;
+            {translate(item.unit?.name)} {item.comment}
+          </>
+        )}
       </>
     ) : (
-      <SelectItem />
+      <SelectItem list={list} />
     )
   }
 </li>

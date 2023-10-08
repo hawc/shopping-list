@@ -1,5 +1,5 @@
 ---
-const { id, name, classes, placeholder, type, list } = Astro.props;
+const { id, name, classes, placeholder, type, list, value } = Astro.props;
 import type { HTMLAttributes } from 'astro/types';
 
 interface Props {
@@ -8,6 +8,7 @@ interface Props {
   classes?: string;
   placeholder?: string;
   type?: HTMLAttributes<'input'>['type'];
+  value?: HTMLAttributes<'input'>['value'];
   list?: string;
 }
 ---
@@ -21,4 +22,5 @@ interface Props {
   }`}
   type={type ?? 'text'}
   list={list}
+  value={value ?? ''}
 />

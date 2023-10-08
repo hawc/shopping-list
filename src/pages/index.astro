@@ -1,30 +1,84 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-import ListItem from '../components/ListItem.astro';
-
 import { xata } from '../utils/xata';
 import List from '../components/List.astro';
 
-const items = await xata.db.items
-  .filter({ 'list.user': null, 'list.status': 'ACTIVE' })
-  .select([
-    'name',
-    'status',
-    'amount',
-    'comment',
-    'unit.name',
-    'product.name',
-    'product.productType',
-    'list.name',
-  ])
+const lists = await xata.db.lists
+  .filter({ user: null, status: 'ACTIVE' })
+  .select(['name', 'user', 'status', 'id'])
   .getAll();
-export type Item = (typeof items)[0];
+
+export type ListType = (typeof lists)[0];
+
+const products = await xata.db.products
+  .select(['id', 'name', 'productType'])
+  .getAll();
+export type Product = (typeof products)[0];
+
+const units = await xata.db.units.select(['id', 'name']).getAll();
+export type Unit = (typeof units)[0];
+
+async function updateItem(field) {
+  if (field.id && field.id !== '') {
+    await xata.db.items.update({
+      id: field.id,
+      amount: field.amount,
+      name: field.name,
+      comment: field.comment,
+    });
+  } else {
+    await xata.db.items.create(field);
+  }
+}
+
+if (Astro.request.method === 'POST') {
+  try {
+    const data = await Astro.request.formData();
+    const dataProduct = data.get('product');
+    const dataUnit = data.get('unit');
+    const id = data.get('id');
+    const productId = products.find(
+      (product) => product.name === dataProduct
+    )?.id;
+    const unitId = units.find((unit) => unit.name === dataUnit)?.id;
+    if (productId) {
+      await updateItem({
+        id: id ? id : undefined,
+        amount: Number(data.get('amount')),
+        comment: data.get('comment'),
+        product: {
+          id: productId,
+        },
+        unit: {
+          id: unitId,
+        },
+        list: {
+          id: data.get('listId'),
+        },
+      });
+    } else {
+      await updateItem({
+        id: id ? id : undefined,
+        amount: Number(data.get('amount')),
+        unit: {
+          id: unitId,
+        },
+        comment: data.get('comment'),
+        name: dataProduct,
+        list: {
+          id: data.get('listId'),
+        },
+      });
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
 ---
 
 <Layout title="Welcome to Astro.">
-  <List>
-    {items.map((item) => <ListItem item={item} />)}
-    <ListItem />
-  </List>
+  {lists.map((list) => <List list={list} />)}
 </Layout>

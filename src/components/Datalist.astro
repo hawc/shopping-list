@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'astro/types';
 import { translate } from '../utils/trans';
 import Input from './Input.astro';
 
-const { items, name, classes, placeholder, type } = Astro.props;
+const { items, name, classes, placeholder, type, value } = Astro.props;
 
 interface Props {
   items: (unknown & { name: string })[];
@@ -11,6 +11,7 @@ interface Props {
   classes?: string;
   placeholder?: string;
   type?: HTMLAttributes<'input'>['type'];
+  value?: HTMLAttributes<'input'>['value'];
 }
 ---
 
@@ -22,11 +23,12 @@ interface Props {
     name={name}
     placeholder={placeholder}
     type={type}
+    value={value}
   />
   <datalist id={`${name}-datalist`}>
     {
       items.map((item) => (
-        <option value={item.name ? translate(item.name) : item} />
+        <option value={item.name}>{translate(item.name)}</option>
       ))
     }
   </datalist>

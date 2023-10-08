@@ -1,7 +1,31 @@
 ---
+import type { ListType } from '../pages/index.astro';
+import { xata } from '../utils/xata';
+import ListItem from './ListItem.astro';
 
+const { list } = Astro.props;
+
+interface Props {
+  list: ListType;
+}
+
+const items = await xata.db.items
+  .filter({ 'list.user': list.user, 'list.status': 'ACTIVE' })
+  .select([
+    'name',
+    'status',
+    'amount',
+    'comment',
+    'unit.name',
+    'product.name',
+    'product.productType',
+  ])
+  .getAll();
+
+export type ItemType = (typeof items)[0];
 ---
 
 <ul role="list">
-  <slot />
+  {items.map((item) => <ListItem item={item} list={list} />)}
+  <ListItem list={list} />
 </ul>
