@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 
 import { xata } from '../utils/xata';
 import List from '../components/List.astro';
+import { translate } from '../utils/trans';
 
 const lists = await xata.db.lists
   .filter({ user: null, status: 'ACTIVE' })
@@ -79,6 +80,6 @@ if (Astro.request.method === 'POST') {
 }
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title={translate('SHOPPING_LIST')}>
   {lists.map((list) => <List list={list} />)}
 </Layout>
