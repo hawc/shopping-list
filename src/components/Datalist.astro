@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { translate } from '../utils/trans';
+import Input from './Input.astro';
+
+const { items, name, classes, placeholder, type } = Astro.props;
+
+interface Props {
+  items: (unknown & { name: string })[];
+  name: string;
+  classes?: string;
+  placeholder?: string;
+  type?: HTMLAttributes<'input'>['type'];
+}
+---
+
+<>
+  <Input
+    classes={classes}
+    list={`${name}-datalist`}
+    id={`${name}-datalist-input`}
+    name={name}
+    placeholder={placeholder}
+    type={type}
+  />
+  <datalist id={`${name}-datalist`}>
+    {
+      items.map((item) => (
+        <option value={item.name ? translate(item.name) : item} />
+      ))
+    }
+  </datalist>
+</>

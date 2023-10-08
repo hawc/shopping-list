@@ -1,0 +1,24 @@
+---
+const { id, name, classes, placeholder, type, list } = Astro.props;
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props {
+  id?: string;
+  name: string;
+  classes?: string;
+  placeholder?: string;
+  type?: HTMLAttributes<'input'>['type'];
+  list?: string;
+}
+---
+
+<input
+  id={id}
+  name={name}
+  placeholder={placeholder}
+  class={`bg-transparent border-b-2 border-gray-500 border-dashed placeholder:text-gray-500 ${
+    classes ?? ''
+  }`}
+  type={type ?? 'text'}
+  list={list}
+/>

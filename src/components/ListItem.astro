@@ -11,7 +11,7 @@ const { item } = Astro.props;
 const status = item?.status as ItemStatus;
 ---
 
-<li class=`block ${status === 'INACTIVE' ? 'line-through' : ''}`>
+<li class={`block ${status === 'INACTIVE' ? 'line-through' : ''}`}>
   {
     item ? (
       <>

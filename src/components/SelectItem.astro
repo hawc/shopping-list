@@ -1,6 +1,8 @@
 ---
 import { translate } from '../utils/trans';
 import { xata } from '../utils/xata';
+import Datalist from './Datalist.astro';
+import Input from './Input.astro';
 
 const products = await xata.db.products
   .select(['id', 'name', 'productType'])
@@ -11,37 +13,13 @@ const units = await xata.db.units.select(['id', 'name']).getAll();
 export type Unit = (typeof units)[0];
 ---
 
-<>
-  <input
-    class="bg-transparent"
-    list="product-datalist"
-    id="product-datalist-input"
-    name="item-product"
+<form class="flex gap-2 flex-col md:flex-row">
+  <Datalist
+    items={products}
+    name="product"
     placeholder={translate('PRODUCT')}
   />
-  <datalist id="product-datalist">
-    {products.map((product) => <option value={translate(product.name)} />)}
-  </datalist>
-  <input
-    name="item-amount"
-    placeholder={translate('AMOUNT')}
-    class="bg-transparent"
-    type="text"
-  />
-  <input
-    class="bg-transparent"
-    list="unit-datalist"
-    id="unit-datalist-input"
-    name="item-unit"
-    placeholder={translate('UNIT')}
-  />
-  <datalist id="unit-datalist">
-    {units.map((unit) => <option value={translate(unit.name)} />)}
-  </datalist>
-  <input
-    name="item-comment"
-    placeholder={translate('COMMENT')}
-    class="bg-transparent"
-    type="text"
-  />
-</>
+  <Input name="item-amount" placeholder={translate('AMOUNT')} />
+  <Datalist items={units} name="unit" placeholder={translate('UNIT')} />
+  <Input name="item-comment" placeholder={translate('COMMENT')} />
+</form>
