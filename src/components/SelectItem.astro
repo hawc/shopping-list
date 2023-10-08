@@ -3,6 +3,13 @@ import { translate } from '../utils/trans';
 import { xata } from '../utils/xata';
 import Datalist from './Datalist.astro';
 import Input from './Input.astro';
+import { Icon } from 'astro-icon';
+
+const { id } = Astro.props;
+
+interface Props {
+  id?: string;
+}
 
 const products = await xata.db.products
   .select(['id', 'name', 'productType'])
@@ -11,6 +18,11 @@ export type Product = (typeof products)[0];
 
 const units = await xata.db.units.select(['id', 'name']).getAll();
 export type Unit = (typeof units)[0];
+
+async function updateItem(field) {
+  const item = await xata.db.items.createOrReplace(id, field);
+  console.log(item);
+}
 ---
 
 <form class="flex gap-2 flex-col md:flex-row">
@@ -19,7 +31,8 @@ export type Unit = (typeof units)[0];
     name="product"
     placeholder={translate('PRODUCT')}
   />
-  <Input name="item-amount" placeholder={translate('AMOUNT')} />
+  <Input name="item-amount" type="number" placeholder={translate('AMOUNT')} />
   <Datalist items={units} name="unit" placeholder={translate('UNIT')} />
   <Input name="item-comment" placeholder={translate('COMMENT')} />
+  <button><Icon size={24} pack="heroicons" name="check-circle" /></button>
 </form>

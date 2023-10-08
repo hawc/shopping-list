@@ -1,4 +1,7 @@
 export const translations = {
+  SHOPPING_LIST: {
+    de: 'Einkaufsliste'
+  },
   PLEASE_SELECT: {
     de: 'Bitte auswählen'
   },

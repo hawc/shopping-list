@@ -3,6 +3,7 @@ import { getImage } from 'astro:assets';
 import Container from '../components/Container.astro';
 import '../styles/global.css';
 import bgImage from '../images/grain.png';
+import { translate } from '../utils/trans';
 interface Props {
   title: string;
 }
@@ -31,7 +32,7 @@ const optimizedBackground = await getImage({
     <div class="h-full flex flex-col">
       <header class="py-8 px-4 flex place-content-center">
         <Container>
-          <h1>Shopping List</h1>
+          <h1>{translate('SHOPPING_LIST')}</h1>
         </Container>
       </header>
       <div class="flex-grow basis-full px-4 flex place-content-center">
