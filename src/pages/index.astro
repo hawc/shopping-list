@@ -4,22 +4,20 @@ import Layout from '../layouts/Layout.astro';
 import ListItem from '../components/ListItem.astro';
 
 import { xata } from "../utils/xata";
+import List from '../components/List.astro';
  
 const items = await xata.db.items.filter({'list.user': null, 'list.status': 'ACTIVE' }).select(["list.name", 'product.name', 'product.productType', 'amount', 'unit.name', 'comment']).getAll();
 export type Item = typeof items[0];
 ---
 
 <Layout title="Welcome to Astro.">
-	<main>
-		<h1>Shopping List</h1>
-		<p>
-			This is a basic implementation of a shopping list manager.
-		</p>
-		<p>
-			Built with Bun, Astro and Xata.
-		</p>
-		<ul role="list" class="link-card-grid">
-			  {items.map((item) => <ListItem item={item}/>)}
-		</ul>
-	</main>
+  <p>
+    This is a basic implementation of a shopping list manager.
+  </p>
+  <p>
+    Built with Bun, Astro and Xata.
+  </p>
+  <List>
+    {items.map((item) => <ListItem item={item}/>)}
+  </List>
 </Layout>

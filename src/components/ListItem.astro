@@ -2,12 +2,12 @@
 import type { Item } from '../pages/index.astro';
 import { translate } from "../utils/trans";
 interface Props {
-	item: Item;
+  item: Item;
 }
 
 const { item } = Astro.props;
 ---
 
 <li class="link-card">
-	{translate(item.product.name)}
+  {translate(item.product.name)}
 </li>
