@@ -14,6 +14,9 @@ export const translations = {
   PIECES: {
     de: 'Stück',
   },
+  COMMENT: {
+    de: 'Kommentar'
+  },
   MILLILITER: {
     de: 'ml',
   },

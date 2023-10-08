@@ -9,13 +9,14 @@ import List from '../components/List.astro';
 const items = await xata.db.items
   .filter({ 'list.user': null, 'list.status': 'ACTIVE' })
   .select([
-    'list.name',
-    'product.name',
-    'product.productType',
+    'name',
     'status',
     'amount',
-    'unit.name',
     'comment',
+    'unit.name',
+    'product.name',
+    'product.productType',
+    'list.name',
   ])
   .getAll();
 export type Item = (typeof items)[0];

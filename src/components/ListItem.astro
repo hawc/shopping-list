@@ -15,7 +15,7 @@ const status = item?.status as ItemStatus;
   {
     item ? (
       <>
-        {translate(item.product.name)}: {item.amount}&nbsp;
+        {item.name ?? translate(item.product.name)}: {item.amount}&nbsp;
         {translate(item.unit.name)}
       </>
     ) : (
