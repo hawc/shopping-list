@@ -1,13 +1,15 @@
 ---
 import type { Item } from '../pages/index.astro';
-import { translate } from "../utils/trans";
+import { translate } from '../utils/trans';
+import type { ItemStatus } from '../utils/xata';
 interface Props {
   item: Item;
 }
 
 const { item } = Astro.props;
+const status = item.status as ItemStatus;
 ---
 
-<li class="link-card">
+<li class=`block ${status === 'INACTIVE' ? 'line-through' : ''}`>
   {translate(item.product.name)}
 </li>

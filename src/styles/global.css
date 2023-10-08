@@ -8,9 +8,15 @@
     font-size: 20px;
     line-height: 1.5;
   }
+
+  body {
+    background-size: max(100vh, 100vw);
+  }
+
   h1 {
     @apply text-3xl;
   }
+
   h2 {
     @apply text-2xl;
   }
