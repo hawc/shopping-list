@@ -24,5 +24,6 @@ export type Item = (typeof items)[0];
 <Layout title="Welcome to Astro.">
   <List>
     {items.map((item) => <ListItem item={item} />)}
+    <ListItem />
   </List>
 </Layout>

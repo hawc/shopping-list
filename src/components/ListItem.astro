@@ -2,14 +2,24 @@
 import type { Item } from '../pages/index.astro';
 import { translate } from '../utils/trans';
 import type { ItemStatus } from '../utils/xata';
+import SelectItem from './SelectItem.astro';
 interface Props {
-  item: Item;
+  item?: Item;
 }
 
 const { item } = Astro.props;
-const status = item.status as ItemStatus;
+const status = item?.status as ItemStatus;
 ---
 
 <li class=`block ${status === 'INACTIVE' ? 'line-through' : ''}`>
-  {translate(item.product.name)}
+  {
+    item ? (
+      <>
+        {translate(item.product.name)}: {item.amount}&nbsp;
+        {translate(item.unit.name)}
+      </>
+    ) : (
+      <SelectItem />
+    )
+  }
 </li>

@@ -1,0 +1,36 @@
+---
+import { translate } from '../utils/trans';
+import { xata } from '../utils/xata';
+
+const products = await xata.db.products
+  .select(['id', 'name', 'productType'])
+  .getAll();
+export type Product = (typeof products)[0];
+
+const units = await xata.db.units.select(['id', 'name']).getAll();
+export type Unit = (typeof units)[0];
+---
+
+<>
+  <input
+    class="bg-transparent"
+    list="product-datalist"
+    id="product-datalist-input"
+    name="product-datalist-input"
+    placeholder={translate('PRODUCT')}
+  />
+  <datalist id="product-datalist">
+    {products.map((product) => <option value={translate(product.name)} />)}
+  </datalist>
+  <input placeholder={translate('AMOUNT')} class="bg-transparent" type="text" />
+  <input
+    class="bg-transparent"
+    list="unit-datalist"
+    id="unit-datalist-input"
+    name="unit-datalist-input"
+    placeholder={translate('UNIT')}
+  />
+  <datalist id="unit-datalist">
+    {units.map((unit) => <option value={translate(unit.name)} />)}
+  </datalist>
+</>
