@@ -23,24 +23,49 @@ const units = await xata.db.units.select(['id', 'name']).getAll();
 export type Unit = (typeof units)[0];
 ---
 
-<form method="POST" class="flex gap-2 flex-col md:flex-row">
-  <Datalist
-    items={products}
-    name="product"
-    placeholder={translate('PRODUCT')}
-    value={item?.name ?? ''}
-  />
-  <Input name="amount" type="number" placeholder={translate('AMOUNT')} />
-  <Datalist
-    items={units}
-    name="unit"
-    placeholder={translate('UNIT')}
-    value={item?.unit.name ?? ''}
-  />
-  <Input name="comment" placeholder={translate('COMMENT')} />
+<form method="POST">
+  <div
+    class="grid gap-2"
+    style={{ gridTemplateColumns: 'auto auto 0fr 0fr 0fr' }}>
+    <div>
+      <Datalist
+        isGrow
+        items={products}
+        name="product"
+        placeholder={translate('PRODUCT')}
+        value={item?.name ?? ''}
+      />
+    </div>
+    <div>
+      <Input
+        isGrow
+        id="comment-input"
+        name="comment"
+        placeholder={translate('COMMENT')}
+      />
+    </div>
+    <div>
+      <Input
+        id="amount-input"
+        name="amount"
+        type="number"
+        placeholder={translate('AMOUNT')}
+      />
+    </div>
+    <div>
+      <Datalist
+        items={units}
+        name="unit"
+        placeholder={translate('UNIT')}
+        value={item?.unit.name ?? ''}
+      />
+    </div>
+    <div>
+      <button type="submit">
+        <Icon size={24} pack="radix" name="check" />
+      </button>
+    </div>
+  </div>
   <Input name="id" type="hidden" value={item?.id} />
   <Input name="listId" type="hidden" value={list.id} />
-  <button type="submit">
-    <Icon size={24} pack="radix" name="check" />
-  </button>
 </form>

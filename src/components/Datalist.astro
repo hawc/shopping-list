@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'astro/types';
 import { translate } from '../utils/trans';
 import Input from './Input.astro';
 
-const { items, name, classes, placeholder, type, value } = Astro.props;
+const { items, name, classes, placeholder, type, value, isGrow } = Astro.props;
 
 interface Props {
   items: (unknown & { name: string })[];
@@ -12,6 +12,7 @@ interface Props {
   placeholder?: string;
   type?: HTMLAttributes<'input'>['type'];
   value?: HTMLAttributes<'input'>['value'];
+  isGrow?: boolean;
 }
 ---
 
@@ -24,6 +25,7 @@ interface Props {
     placeholder={placeholder}
     type={type}
     value={value}
+    isGrow={isGrow}
   />
   <datalist id={`${name}-datalist`}>
     {

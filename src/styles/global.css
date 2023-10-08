@@ -20,4 +20,10 @@
   h2 {
     @apply text-2xl;
   }
+
+  ::-webkit-list-button,
+  datalist::-webkit-calendar-picker-indicator,
+  input::-webkit-calendar-picker-indicator {
+    display: none !important;
+  }
 }

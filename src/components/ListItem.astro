@@ -21,10 +21,16 @@ const isEditing = false;
         {isEditing ? (
           <SelectItem item={item} list={list} />
         ) : (
-          <>
-            {item.name ?? translate(item.product.name)}: {item.amount}&nbsp;
-            {translate(item.unit?.name)} {item.comment}
-          </>
+          <div
+            class="grid gap-2"
+            style={{ gridTemplateColumns: '1fr auto auto' }}>
+            <div class="truncate">
+              {item.name ?? translate(item.product.name)}
+              {item.comment ? ` (${item.comment})` : ''}
+            </div>
+            <div>{item.amount}</div>
+            <div>{translate(item.unit?.name)}</div>
+          </div>
         )}
       </>
     ) : (

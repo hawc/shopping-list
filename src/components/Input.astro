@@ -1,5 +1,14 @@
 ---
-const { id, name, classes, placeholder, type, list, value } = Astro.props;
+const {
+  id,
+  name,
+  classes,
+  placeholder,
+  type,
+  list,
+  value,
+  isGrow = false,
+} = Astro.props;
 import type { HTMLAttributes } from 'astro/types';
 
 interface Props {
@@ -10,6 +19,7 @@ interface Props {
   type?: HTMLAttributes<'input'>['type'];
   value?: HTMLAttributes<'input'>['value'];
   list?: string;
+  isGrow?: boolean;
 }
 ---
 
@@ -17,10 +27,43 @@ interface Props {
   id={id}
   name={name}
   placeholder={placeholder}
-  class={`bg-transparent border-b-2 border-gray-500 border-dashed placeholder:text-gray-500 ${
+  class={`min-w-0 w-full bg-transparent border-b-2 border-gray-500 border-dashed placeholder:text-gray-500 ${
     classes ?? ''
   }`}
   type={type ?? 'text'}
   list={list}
   value={value ?? ''}
 />
+<script define:vars={{ id, isGrow }}>
+function handleChange(currentTarget) {
+  const element = currentTarget;
+  if (isGrow) {
+    element.style.minWidth = '50px';
+    element.style.width = '0';
+  } else {
+    element.style.width = '50px';
+  }
+  const { borderLeftWidth, borderRightWidth } = getComputedStyle(element);
+  const numberPxToNumber = (numberPx) => parseInt(numberPx.slice(0, -2));
+  const borderWidth =
+    numberPxToNumber(borderLeftWidth) + numberPxToNumber(borderRightWidth);
+  const width = `${Math.max(element.scrollWidth, 40) + borderWidth}px`;
+  if (isGrow) {
+    element.style.minWidth = `${width}`;
+    element.style.width = '100%';
+  } else {
+    element.style.width = `${width}`;
+  }
+}
+
+if (id) {
+  const input = document.getElementById(id);
+  handleChange(input);
+  input.addEventListener('input', (event) =>
+    handleChange(event.currentTarget)
+  );
+  input.addEventListener('blur', (event) =>
+    handleChange(event.currentTarget)
+  );
+}
+</script>
